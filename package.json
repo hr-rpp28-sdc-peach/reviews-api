@@ -1,0 +1,25 @@
+{
+  "name": "reviews-api",
+  "version": "1.0.0",
+  "description": "Reviews API for Peach SDC",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hr-rpp28-sdc-peach/reviews-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hr-rpp28-sdc-peach/reviews-api/issues"
+  },
+  "homepage": "https://github.com/hr-rpp28-sdc-peach/reviews-api#readme",
+  "dependencies": {
+    "postgres": "^1.0.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
+  }
+}
