@@ -4,3 +4,111 @@
 2021-07-14 20:32:38.815 CDT [75856] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
 2021-07-14 20:32:38.826 CDT [75857] LOG:  database system was shut down at 2021-07-14 20:26:45 CDT
 2021-07-14 20:32:38.838 CDT [75856] LOG:  database system is ready to accept connections
+2021-07-15 14:35:40.852 CDT [94609] ERROR:  database "reviews" does not exist
+2021-07-15 14:35:40.852 CDT [94609] STATEMENT:  DROP DATABASE reviews;
+2021-07-15 14:35:47.177 CDT [94614] ERROR:  database "mydb" does not exist
+2021-07-15 14:35:47.177 CDT [94614] STATEMENT:  DROP DATABASE mydb;
+2021-07-15 14:35:50.627 CDT [94619] ERROR:  database "review" does not exist
+2021-07-15 14:35:50.627 CDT [94619] STATEMENT:  DROP DATABASE review;
+2021-07-15 14:47:01.969 CDT [94967] FATAL:  role "root" does not exist
+2021-07-15 14:48:09.151 CDT [94996] ERROR:  syntax error at or near "DESCRIBE" at character 1
+2021-07-15 14:48:09.151 CDT [94996] STATEMENT:  DESCRIBE reviews
+2021-07-15 14:51:51.070 CDT [95110] ERROR:  syntax error at or near "help" at character 1
+2021-07-15 14:51:51.070 CDT [95110] STATEMENT:  help
+2021-07-15 14:52:46.567 CDT [95161] ERROR:  syntax error at or near "wq" at character 1
+2021-07-15 14:52:46.567 CDT [95161] STATEMENT:  wq
+	hlep
+2021-07-16 09:07:26.651 CDT [96345] FATAL:  database "schema.pgsql" does not exist
+2021-07-16 09:08:08.735 CDT [96383] FATAL:  database "reviews" does not exist
+2021-07-16 09:39:49.304 CDT [97279] ERROR:  syntax error at or near "(" at character 39
+2021-07-16 09:39:49.304 CDT [97279] STATEMENT:  CREATE TABLE reviews.reviews (
+	 ID int(1) NOT NULL AUTO_INCREMENT,
+	 product_id int,
+	 rating_value TINYINT,
+	 created_date DATETIME,/
+	 summary VARCHAR(60),
+	 body VARCHAR(1000),
+	 recommended TINYINT,
+	 reported TINYINT,
+	 reviewer_name VARCHAR(40),
+	 reviewer_email VARCHAR(40),
+	 response VARCHAR(1000),
+	 helpfulness TINYINT,
+	 PRIMARY KEY (id));
+2021-07-16 09:40:27.231 CDT [97279] ERROR:  syntax error at or near "AUTO_INCREMENT" at character 49
+2021-07-16 09:40:27.231 CDT [97279] STATEMENT:  CREATE TABLE reviews.reviews (
+	 ID int NOT NULL AUTO_INCREMENT,
+	 product_id int,
+	 rating_value TINYINT,
+	 created_date DATETIME,/
+	 summary VARCHAR(60),
+	 body VARCHAR(1000),
+	 recommended TINYINT,
+	 reported TINYINT,
+	 reviewer_name VARCHAR(40),
+	 reviewer_email VARCHAR(40),
+	 response VARCHAR(1000),
+	 helpfulness TINYINT,
+	 PRIMARY KEY (id));
+2021-07-16 09:43:14.976 CDT [97279] ERROR:  syntax error at or near "/" at character 107
+2021-07-16 09:43:14.976 CDT [97279] STATEMENT:  CREATE TABLE reviews.reviews (
+	 id SERIAL,
+	 product_id int,
+	 rating_value TINYINT,
+	 created_date DATETIME,/
+	 summary VARCHAR(60),
+	 body VARCHAR(1000),
+	 recommended TINYINT,
+	 reported TINYINT,
+	 reviewer_name VARCHAR(40),
+	 reviewer_email VARCHAR(40),
+	 response VARCHAR(1000),
+	 helpfulness TINYINT,
+	 PRIMARY KEY (id));
+2021-07-16 09:43:33.279 CDT [97279] ERROR:  type "tinyint" does not exist at character 75
+2021-07-16 09:43:33.279 CDT [97279] STATEMENT:  CREATE TABLE reviews.reviews (
+	 id SERIAL,
+	 product_id int,
+	 rating_value TINYINT,
+	 created_date DATETIME,
+	 summary VARCHAR(60),
+	 body VARCHAR(1000),
+	 recommended TINYINT,
+	 reported TINYINT,
+	 reviewer_name VARCHAR(40),
+	 reviewer_email VARCHAR(40),
+	 response VARCHAR(1000),
+	 helpfulness TINYINT,
+	 PRIMARY KEY (id));
+2021-07-16 09:45:59.442 CDT [97279] ERROR:  type "datetime" does not exist at character 102
+2021-07-16 09:45:59.442 CDT [97279] STATEMENT:  CREATE TABLE reviews.reviews (
+	 id SERIAL,
+	 product_id INTEGER,
+	 rating_value INTEGER,
+	 created_date DATETIME,
+	 summary VARCHAR(60),
+	 body VARCHAR(1000),
+	 recommended BOOLEAN,
+	 reported BOOLEAN,
+	 reviewer_name VARCHAR(40),
+	 reviewer_email VARCHAR(40),
+	 response VARCHAR(1000),
+	 helpfulness INTEGER,
+	 PRIMARY KEY (id));
+2021-07-16 09:53:44.387 CDT [97709] FATAL:  role "myuser" does not exist
+2021-07-16 09:53:57.108 CDT [97729] FATAL:  database "review_api" does not exist
+2021-07-16 10:43:10.134 CDT [75858] PANIC:  could not open file "/Users/margaretkearns/Documents/Code/rpp/reviews-api/./db/global/pg_control": No such file or directory
+2021-07-16 10:43:10.334 CDT [75856] LOG:  checkpointer process (PID 75858) was terminated by signal 6: Abort trap: 6
+2021-07-16 10:43:10.334 CDT [75856] LOG:  terminating any other active server processes
+2021-07-16 10:43:10.334 CDT [331] WARNING:  terminating connection because of crash of another server process
+2021-07-16 10:43:10.334 CDT [331] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-07-16 10:43:10.334 CDT [331] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-07-16 10:43:10.334 CDT [75861] WARNING:  terminating connection because of crash of another server process
+2021-07-16 10:43:10.334 CDT [75861] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-07-16 10:43:10.334 CDT [75861] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-07-16 10:43:10.334 CDT [97734] WARNING:  terminating connection because of crash of another server process
+2021-07-16 10:43:10.334 CDT [97734] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2021-07-16 10:43:10.334 CDT [97734] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2021-07-16 10:43:10.342 CDT [75856] LOG:  all server processes terminated; reinitializing
+2021-07-16 10:43:10.346 CDT [75856] FATAL:  could not stat data directory "/Users/margaretkearns/Documents/Code/rpp/reviews-api/./db": No such file or directory
+2021-07-16 10:43:10.348 CDT [75856] LOG:  database system is shut down
