@@ -1,0 +1,2 @@
+
+CREATE TABLE IF NOT EXISTS reviews.reviews (id serial unique primary key, product_id integer, rating integer, add_date timestamp, summary varchar(60), body varchar(1000), recommended boolean, reported boolean, reviewer_name varchar(40), reviewer_email varchar(40), response varchar(500), helpfulness integer);
