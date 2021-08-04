@@ -71,50 +71,57 @@ module.exports.meta = {
 
 // current response from my API for product 28218
 
-[
-  {
-      "id": 11561,
-      "product_id": 2000,
-      "rating": 4,
-      "add_date": "1610044711798",
-      "summary": "Iste minus harum quod debitis rerum quasi dolores voluptatem animi.",
-      "body": "Eum rem cupiditate occaecati. Rerum harum quidem qui quam magni nobis neque voluptatem vel. Omnis deleniti iste. Animi saepe sed fuga omnis. Enim dolor pariatur consequuntur voluptatem velit quis.",
-      "recommended": true,
-      "reported": false,
-      "reviewer_name": "Wilber.King62",
-      "reviewer_email": "Timothy15@yahoo.com",
-      "response": "null",
-      "helpfulness": 27
-  },
-  {
-      "id": 11562,
-      "product_id": 2000,
-      "rating": 4,
-      "add_date": "1588709418532",
-      "summary": "Deleniti sit repellat architecto et unde.",
-      "body": "Voluptatem quae adipisci. Cum possimus explicabo qui ullam aut minus ullam libero. Perferendis suscipit dolorum quae. Ut ut qui omnis inventore. Eum saepe qui quidem a occaecati possimus consequatur. Nihil dolorem nisi temporibus maxime.",
-      "recommended": true,
-      "reported": false,
-      "reviewer_name": "Rashad.Marvin2",
-      "reviewer_email": "Christine_Prohaska40@gmail.com",
-      "response": "null",
-      "helpfulness": 17
-  },
-  {
-      "id": 11563,
-      "product_id": 2000,
-      "rating": 2,
-      "add_date": "1594665444348",
-      "summary": "Nobis libero ab autem fuga laudantium.",
-      "body": "Ut sit numquam nostrum. Ad quia sed minima. Minima et nemo qui vel culpa. Rerum sit aut repudiandae animi cum quis.",
-      "recommended": true,
-      "reported": true,
-      "reviewer_name": "Derek_Haley95",
-      "reviewer_email": "Brittany.Klein@gmail.com",
-      "response": "null",
-      "helpfulness": 5
-  }
-]
+{
+  "product": "28218",
+  "page": 0,
+  "count": 5,
+  "results": [
+      {
+          "review_id": 162483,
+          "rating": 4,
+          "summary": "Recusandae quis quasi eum totam nam corrupti possimus suscipit eius.",
+          "response": "null",
+          "body": "Ex qui deleniti beatae molestias culpa et et in. Facere voluptas veniam rerum rerum alias qui illo dolorem. Quae vel et.",
+          "date": "2020-11-18T00:18:35.460Z",
+          "reviewer_name": "Catherine59",
+          "helpfulness": 10,
+          "photos": []
+      },
+      {
+          "review_id": 162484,
+          "rating": 1,
+          "summary": "Et nemo numquam numquam eius.",
+          "response": "null",
+          "body": "Accusantium quis omnis quo nulla et. Asperiores consequatur quas omnis ut sed autem non. Explicabo aut beatae corrupti fugiat temporibus deleniti. Numquam amet accusamus vero vitae atque quis. Nihil eum optio voluptatibus quisquam voluptas occaecati sed. Dolor occaecati dolorem quia non occaecati quae.",
+          "date": "2020-12-06T13:16:39.850Z",
+          "reviewer_name": "Clay11",
+          "helpfulness": 25,
+          "photos": []
+      },
+      {
+          "review_id": 162485,
+          "rating": 3,
+          "summary": "Consectetur iure fugit necessitatibus maiores.",
+          "response": "null",
+          "body": "Provident corrupti perspiciatis ipsa exercitationem maxime voluptatem. Illo tempore eligendi doloremque nesciunt a. Magni qui mollitia.",
+          "date": "2021-03-23T07:35:38.981Z",
+          "reviewer_name": "Leopold.Heller",
+          "helpfulness": 6,
+          "photos": []
+      },
+      {
+          "review_id": 162486,
+          "rating": 2,
+          "summary": "Dolorem quasi blanditiis est minus est soluta.",
+          "response": "null",
+          "body": "Eos esse molestiae dolorem amet voluptatem commodi. Dignissimos ut maiores sint ullam possimus sunt ipsa. Libero neque sapiente vitae ab vel deleniti. In deleniti inventore sint est totam sed sed doloribus dolor. Earum consequatur beatae.",
+          "date": "2020-09-06T22:45:57.360Z",
+          "reviewer_name": "Hilbert.Gibson3",
+          "helpfulness": 23,
+          "photos": []
+      }
+  ]
+}
 
 // results from actual API for product 28218
 {

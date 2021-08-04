@@ -25,14 +25,17 @@ app.get('/reviews', (req, res) => {
       results.rows.forEach((row) => {
         if (row.reported === false) {
 
-          var revResponse = row.response || '';
+          var revResponse = row.response;
+          if (revResponse === 'null') {
+            revResponse = '';
+          }
           var revDate = new Date(parseInt(row.add_date)).toISOString();
 
           response.results.push({
             'review_id': row.id,
             'rating': row.rating,
             'summary': row.summary,
-            'recommend': row.recommend,
+            'recommend': row.recommended,
             'response': revResponse,
             'body': row.body,
             'date': revDate,
