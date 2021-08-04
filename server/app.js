@@ -13,7 +13,36 @@ app.get('/reviews', (req, res) => {
     if (error) {
       res.status(502).send(error);
     } else {
-      res.status(200).send(results.rows);
+      var data = results.rows;
+
+      var response  = {
+        'product': req.query.product_id.toString(),
+        'page': 0,
+        'count': 5,
+        'results': []
+      };
+
+      results.rows.forEach((row) => {
+        if (row.reported === false) {
+
+          var revResponse = row.response || '';
+          var revDate = new Date(parseInt(row.add_date)).toISOString();
+
+          response.results.push({
+            'review_id': row.id,
+            'rating': row.rating,
+            'summary': row.summary,
+            'recommend': row.recommend,
+            'response': revResponse,
+            'body': row.body,
+            'date': revDate,
+            'reviewer_name': row.reviewer_name,
+            'helpfulness': row.helpfulness,
+            'photos': []
+          });
+        }
+      });
+      res.status(200).send(response);
     }
   })
 });
