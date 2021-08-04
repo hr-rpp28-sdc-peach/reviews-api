@@ -1,14 +1,14 @@
 const config = require('../config.js');
-const Pool = require('pg').Pool
+const { Pool } = require('pg');
 const pool = new Pool(config.DBconnect);
 
-const getReviews = (request, response) => {
+module.exports.getReviews = (options, callback) => {
 
-
-  pool.query('SELECT * FROM reviews ORDER BY id ASC', (error, results) => {
+  pool.query(`SELECT * FROM reviews WHERE product_id = ${options.product_id}`, (error, results) => {
     if (error) {
-      throw error
+      callback(error);
+    } else {
+      callback(null, results);
     }
-    response.status(200).json(results.rows)
-  })
+  });
 }
