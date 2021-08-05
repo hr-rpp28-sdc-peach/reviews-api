@@ -67,3 +67,24 @@ module.exports.report = (options, callback) => {
     }
   });
 }
+
+module.exports.helpful = (options, callback) => {
+  return new Promise((resolve, reject) => {
+    pool.query(`SELECT helpfulness FROM reviews WHERE id = ${options.review_id}`, (error, results) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(results.rows);
+      }
+    });
+  }).then((helpfulness) => {
+    console.log(helpfulness);
+    pool.query(`UPDATE reviews SET helpfulness = ${helpfulness[0].helpfulness + 1} WHERE id = ${options.review_id}`, (error, results) => {
+      if (error) {
+        callback(error);
+      } else {
+        callback(null, results);
+      }
+    });
+  })
+}

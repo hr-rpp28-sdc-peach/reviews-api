@@ -64,8 +64,14 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  res.send('Put request received at /reviews/:review_id/helpful');
-
+  db.helpful(req.params, (error, results) => {
+    if (error) {
+      // console.log(error);
+      res.status(502).send(error);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
