@@ -63,7 +63,7 @@ module.exports.report = (options, callback) => {
     if (error) {
       callback(error);
     } else {
-      callback(results);
+      callback(null, results);
     }
   });
 }
