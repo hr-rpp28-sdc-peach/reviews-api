@@ -34,7 +34,7 @@ app.get('/reviews', (req, res) => {
           if (revResponse === 'null') {
             revResponse = '';
           }
-          var revDate = new Date(parseInt(row.add_date)).toISOString();
+          var revDate = new Date(row.add_date).toISOString();
 
           response.results.push({
             'review_id': row.id,

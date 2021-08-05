@@ -1,5 +1,5 @@
 
-CREATE TABLE IF NOT EXISTS reviews (id serial unique primary key, product_id integer, rating integer, add_date varchar(15), summary varchar(200), body varchar(1000), recommended boolean, reported boolean, reviewer_name varchar(40), reviewer_email varchar(40), response varchar(500), helpfulness integer);
+CREATE TABLE IF NOT EXISTS reviews (id serial unique primary key, product_id integer, rating integer, add_date BIGINT, summary varchar(200), body varchar(1000), recommended boolean, reported boolean, reviewer_name varchar(40), reviewer_email varchar(40), response varchar(500), helpfulness integer);
 
 CREATE TABLE reviews_photos (id serial unique primary key, review_id integer, photo_url varchar(2000), FOREIGN KEY(review_id) REFERENCES reviews(id));
 
@@ -15,7 +15,4 @@ CREATE TABLE characteristics_reviews (id serial unique primary key, characterist
 
 \COPY characteristics_reviews FROM './data/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
 
-/* you can create a text column for the initial import. Then after you're done importing, you can execute*/
-
-
-/*to convert the format of the imported data to a timestamp. Then you're set.*/
+ALTER TABLE reviews ALTER COLUMN add_date TYPE TIMESTAMP USING to_timestamp(add_date/1000);
