@@ -69,7 +69,13 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
-  res.send('Put request received at /reviews/:review_id/report');
+  db.report(req.params, (error, results) => {
+    if (error) {
+      res.status(502).send(error);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
 module.exports = app;

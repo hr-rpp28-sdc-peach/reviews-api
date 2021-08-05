@@ -58,12 +58,12 @@ module.exports.getReviews = (options, callback) => {
   });
 }
 
-module.exports.markAsHelpful = (options, callback) => {
-  pool.query(`SELECT * FROM reviews WHERE product_id = ${options.product_id}`, (error, results) => {
+module.exports.report = (options, callback) => {
+  pool.query(`UPDATE reviews SET reported = true WHERE id = ${options.review_id}`, (error, results) => {
     if (error) {
-      reject(error);
+      callback(error);
     } else {
-      resolve(results);
+      callback(results);
     }
   });
 }
