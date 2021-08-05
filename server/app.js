@@ -13,7 +13,6 @@ app.get('/reviews', (req, res) => {
     if (error) {
       res.status(502).send(error);
     } else {
-      var data = results.rows;
 
       var response  = {
         'product': req.query.product_id.toString(),
@@ -22,7 +21,7 @@ app.get('/reviews', (req, res) => {
         'results': []
       };
 
-      results.rows.forEach((row) => {
+      results.forEach((row) => {
         if (row.reported === false) {
 
           var revResponse = row.response;

@@ -123,23 +123,123 @@ module.exports.meta = {
   ]
 }
 
-// results from actual API for product 28218
+// results from actual API for product 28223
 {
-  "product": "28218",
+  "product": "28223",
   "page": 0,
   "count": 5,
   "results": [
       {
-          "review_id": 407554,
-          "rating": 5,
-          "summary": "Ye is good at everything",
+          "review_id": 407558,
+          "rating": 3,
+          "summary": "Officia debitis saepe doloribus occaecati atque aut optio.",
           "recommend": true,
-          "response": "",
-          "body": "I mortgaged my house to pay for these",
-          "date": "2018-12-13T00:00:00.000Z",
-          "reviewer_name": "yecrazy",
-          "helpfulness": 2,
-          "photos": []
+          "response": null,
+          "body": "Voluptates saepe totam. Ut unde voluptatem qui illo velit. Rerum esse aut perferendis. Vero nobis id modi quia eos dolores commodi id. Facilis est soluta temporibus accusantium in quam optio corrupti voluptatem.",
+          "date": "2021-07-06T00:00:00.000Z",
+          "reviewer_name": "Gilbert.Heathcote",
+          "helpfulness": 28,
+          "photos": [
+              {
+                  "id": 769595,
+                  "url": "https://images.unsplash.com/photo-1524604519054-2365ac11e431?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+              },
+              {
+                  "id": 769596,
+                  "url": "https://images.unsplash.com/photo-1524604519054-2365ac11e431?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80"
+              }
+          ]
+      },
+      {
+          "review_id": 407585,
+          "rating": 3,
+          "summary": "Dolorum et vitae harum autem.",
+          "recommend": true,
+          "response": null,
+          "body": "Eius aliquam beatae. Quod magnam cum. Repudiandae quos ut qui quae a labore quaerat est dolores. Velit ut voluptas voluptatem earum repudiandae est. Qui aut explicabo eos saepe occaecati.",
+          "date": "2021-05-17T00:00:00.000Z",
+          "reviewer_name": "Geovany29",
+          "helpfulness": 27,
+          "photos": [
+              {
+                  "id": 769545,
+                  "url": "https://images.unsplash.com/photo-1542280756-74b2f55e73ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+              },
+              {
+                  "id": 769546,
+                  "url": "https://images.unsplash.com/photo-1553830591-d8632a99e6ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1511&q=80"
+              },
+              {
+                  "id": 769547,
+                  "url": "https://images.unsplash.com/photo-1519862170344-6cd5e49cb996?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              }
+          ]
+      },
+      {
+          "review_id": 407556,
+          "rating": 2,
+          "summary": "Optio totam aspernatur.",
+          "recommend": true,
+          "response": "\"Et nisi fuga qui doloremque non laudantium voluptas.\"",
+          "body": "Enim corrupti et ut molestiae quod. Corporis earum aut est. Sit velit qui laudantium suscipit qui quae qui quia. Quasi iste laudantium vitae earum numquam omnis eum quia non. Est dolor quo.",
+          "date": "2021-01-11T00:00:00.000Z",
+          "reviewer_name": "Monique45",
+          "helpfulness": 19,
+          "photos": [
+              {
+                  "id": 769599,
+                  "url": "https://images.unsplash.com/photo-1492447105260-2e947425b5cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
+              },
+              {
+                  "id": 769600,
+                  "url": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+              },
+              {
+                  "id": 769601,
+                  "url": "https://images.unsplash.com/photo-1451256656121-9ffc0c898a49?ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+              }
+          ]
+      },
+      {
+          "review_id": 407559,
+          "rating": 4,
+          "summary": "Tempore earum velit aut alias et qui nobis et itaque.",
+          "recommend": true,
+          "response": null,
+          "body": "Dolor assumenda cum dolor. Aut molestiae quia earum laboriosam voluptates cum aut enim. Minus blanditiis cum vitae in.",
+          "date": "2020-10-06T00:00:00.000Z",
+          "reviewer_name": "Gilbert_Ruecker10",
+          "helpfulness": 14,
+          "photos": [
+              {
+                  "id": 769594,
+                  "url": "https://images.unsplash.com/photo-1517720359744-6d12f8a09b10?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1567&q=80"
+              }
+          ]
+      },
+      {
+          "review_id": 407560,
+          "rating": 4,
+          "summary": "Aut omnis quos fuga explicabo non ipsa consectetur.",
+          "recommend": true,
+          "response": null,
+          "body": "Molestiae rerum eveniet laborum aspernatur aliquid facere voluptatibus dignissimos et. Fugiat dolore aliquid molestias illo nesciunt. Facilis voluptas ea eos quia molestiae. Facilis quisquam iste dicta animi ut qui quos qui. Beatae omnis veniam est facere.",
+          "date": "2021-05-02T00:00:00.000Z",
+          "reviewer_name": "Lily30",
+          "helpfulness": 5,
+          "photos": [
+              {
+                  "id": 769593,
+                  "url": "https://images.unsplash.com/photo-1507920676663-3b72429774ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"
+              }
+          ]
       }
   ]
 }
+
+//URLS for postman
+
+// http://localhost:1128/reviews/?product_id=28218
+
+// https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=28223
+
