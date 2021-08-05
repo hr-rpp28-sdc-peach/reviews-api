@@ -9,6 +9,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/reviews', (req, res) => {
   var options = req.query;
+  if (options.page === undefined) {
+    options.page = 1;
+  }
+  if (options.count === undefined) {
+    options.count = 5;
+  }
   db.getReviews(options, (error, results) => {
     if (error) {
       res.status(502).send(error);
@@ -16,8 +22,8 @@ app.get('/reviews', (req, res) => {
 
       var response  = {
         'product': req.query.product_id.toString(),
-        'page': 0,
-        'count': 5,
+        'page': (options.page - 1) * options.count,
+        'count': options.count,
         'results': []
       };
 
@@ -59,6 +65,7 @@ app.post('/reviews', (req, res) => {
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
   res.send('Put request received at /reviews/:review_id/helpful');
+
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
