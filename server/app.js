@@ -40,7 +40,7 @@ app.get('/reviews', (req, res) => {
             'date': revDate,
             'reviewer_name': row.reviewer_name,
             'helpfulness': row.helpfulness,
-            'photos': []
+            'photos': row.photos
           });
         }
       });
