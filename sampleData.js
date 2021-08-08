@@ -292,3 +292,7 @@ characteristics
 INSERT INTO reviews (product_id, rating, add_date, summary, body, recommended, reviewer_name, reviewer_email) VALUES (28212, 8, '2021-06-07 22:55:44', 'This is pink', 'I think this is a pretty good jacket, but I wish that it was made of cheese!', false, 'meergo Kearns', 'margo000@gmail.com');
 
 SELECT setval('reviews_id_seq', (SELECT MAX(id) FROM reviews)+1);
+
+SELECT setval('reviews_photos_id_seq', (SELECT MAX(id) FROM reviews_photos)+1);
+
+SELECT setval('characteristics_reviews_id_seq', (SELECT MAX(id) FROM characteristics_reviews)+1);

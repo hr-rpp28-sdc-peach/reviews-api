@@ -60,6 +60,7 @@ module.exports.getReviews = (options, callback) => {
 
 module.exports.addReview = (options, callback) => {
   var queryString = `INSERT INTO reviews (product_id, rating, add_date, summary, body, recommended, reviewer_name, reviewer_email) VALUES (${options.product_id}, ${options.rating}, current_timestamp, $$${options.summary}$$, $$${options.body}$$, ${options.recommend}, $$${options.name}$$, $$${options.email}$$)RETURNING id`;
+  var reviewId = null;
 
   return new Promise((resolve, reject) => {
     pool.query(queryString, (error, results) => {
@@ -70,13 +71,12 @@ module.exports.addReview = (options, callback) => {
       }
     });
   }).then((results) => {
-    console.log(results.rows[0].id);
+    reviewId = results.rows[0].id;
     var photos = options.photos;
 
     photos.map((photo) => {
       return new Promise((resolve, reject) => {
         var queryString = `INSERT INTO reviews_photos (review_id, photo_url) VALUES (${results.rows[0].id}, $$${photo}$$)`;
-        console.log(queryString);
         pool.query(queryString, (error, results) => {
           if (error) {
             console.log(error);
@@ -87,6 +87,27 @@ module.exports.addReview = (options, callback) => {
     });
   });
   return Promise.all(photos);
+  }).then((photoResults) => {
+    var characteristics = options.characteristics;
+    var characteristicArr = [];
+
+    for (var key in characteristics) {
+      console.log(key);
+      characteristicArr.push(new Promise((resolve, reject) => {
+        var charQueryString = `INSERT INTO characteristics_reviews (characteristic_id, review_id, characteristic_value) VALUES (${key}, ${reviewId}, ${characteristics[key]})`;
+        console.log(charQueryString);
+        pool.query(charQueryString, (error, results) => {
+          if (error) {
+            console.log(error);
+          } else {
+            resolve(results);
+          }
+        });
+      })
+    );
+    console.log(characteristicArr);
+  }
+  return Promise.all(characteristicArr);
   }).then((results) => {
     callback(null, results);
   }).catch((error) => {
