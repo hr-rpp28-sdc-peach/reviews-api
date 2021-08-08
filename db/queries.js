@@ -58,6 +58,42 @@ module.exports.getReviews = (options, callback) => {
   });
 }
 
+module.exports.addReview = (options, callback) => {
+  var queryString = `INSERT INTO reviews (product_id, rating, add_date, summary, body, recommended, reviewer_name, reviewer_email) VALUES (${options.product_id}, ${options.rating}, current_timestamp, $$${options.summary}$$, $$${options.body}$$, ${options.recommend}, $$${options.name}$$, $$${options.email}$$)RETURNING id`;
+
+  return new Promise((resolve, reject) => {
+    pool.query(queryString, (error, results) => {
+      if (error) {
+        console.log(error);
+      } else {
+        resolve(results);
+      }
+    });
+  }).then((results) => {
+    console.log(results.rows[0].id);
+    var photos = options.photos;
+
+    photos.map((photo) => {
+      return new Promise((resolve, reject) => {
+        var queryString = `INSERT INTO reviews_photos (review_id, photo_url) VALUES (${results.rows[0].id}, $$${photo}$$)`;
+        console.log(queryString);
+        pool.query(queryString, (error, results) => {
+          if (error) {
+            console.log(error);
+          } else {
+            resolve(results);
+          }
+        });
+    });
+  });
+  return Promise.all(photos);
+  }).then((results) => {
+    callback(null, results);
+  }).catch((error) => {
+    callback(error);
+  });
+}
+
 module.exports.report = (options, callback) => {
   pool.query(`UPDATE reviews SET reported = true WHERE id = ${options.review_id}`, (error, results) => {
     if (error) {

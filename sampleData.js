@@ -243,3 +243,52 @@ module.exports.meta = {
 
 // https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=28223
 
+//Info on posting to /reviews
+
+product_id
+  integer
+  Required ID of the product to post the review for
+rating
+  int
+  Integer (1-5) indicating the review rating
+summary
+  text
+  Summary text of the review
+body
+  text
+  Continued or full text of the review
+recommend
+  bool
+  Value indicating if the reviewer recommends the product
+name
+  text
+  Username for question asker
+email
+  text
+  Email address for question asker
+photos
+  [text]
+  Array of text urls that link to images to be shown
+characteristics
+  object
+  Object of keys representing characteristic_id and values representing the review value for that characteristic. { "14": 5, "15": 5 //...}
+
+//data for one review as sent from client on req.body
+
+{
+  product_id: 28212,
+  rating: 3,
+  recommend: true,
+  characteristics: { '74286': 4, '74287': 4, '74288': 4, '74289': 3 },
+  summary: 'This is pretty good',
+  body: "I think this is a pretty good jacket, but I wish that it wasn't so long!",
+  photos: [ 'https://www.panamahatmall.com/images/demarpa0098_L.jpg?v=720' ],
+  name: 'Margaret Kearns',
+  email: 'margokearns@gmail.com'
+}
+
+//statement for inserting
+
+INSERT INTO reviews (product_id, rating, add_date, summary, body, recommended, reviewer_name, reviewer_email) VALUES (28212, 8, '2021-06-07 22:55:44', 'This is pink', 'I think this is a pretty good jacket, but I wish that it was made of cheese!', false, 'meergo Kearns', 'margo000@gmail.com');
+
+SELECT setval('reviews_id_seq', (SELECT MAX(id) FROM reviews)+1);

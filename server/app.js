@@ -4,8 +4,8 @@ const db = require('../db/queries.js');
 let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/reviews', (req, res) => {
   var options = req.query;
@@ -60,13 +60,19 @@ app.get('/reviews/meta', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  res.send('Post request received at /reviews')
+  // console.log(req.body);
+  db.addReview(req.body, (error, results) => {
+    if (error) {
+      res.status(502).send(error);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  db.helpful(req.params, (error, results) => {
+  db.helpful(req.body, (error, results) => {
     if (error) {
-      // console.log(error);
       res.status(502).send(error);
     } else {
       res.status(200).send(results);
@@ -75,7 +81,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
-  db.report(req.params, (error, results) => {
+  db.report(req.body, (error, results) => {
     if (error) {
       res.status(502).send(error);
     } else {
