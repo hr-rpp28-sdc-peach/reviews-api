@@ -71,7 +71,7 @@ app.post('/reviews', (req, res) => {
 });
 
 app.put('/reviews/:review_id/helpful', (req, res) => {
-  db.helpful(req.body, (error, results) => {
+  db.helpful(req.params, (error, results) => {
     if (error) {
       res.status(502).send(error);
     } else {
@@ -81,7 +81,7 @@ app.put('/reviews/:review_id/helpful', (req, res) => {
 });
 
 app.put('/reviews/:review_id/report', (req, res) => {
-  db.report(req.body, (error, results) => {
+  db.report(req.params, (error, results) => {
     if (error) {
       res.status(502).send(error);
     } else {
