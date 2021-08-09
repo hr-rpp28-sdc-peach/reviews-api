@@ -56,7 +56,14 @@ app.get('/reviews', (req, res) => {
 });
 
 app.get('/reviews/meta', (req, res) => {
-  res.send('Get request received at /reviews/meta')
+  db.getMeta(req.query, (error, results) => {
+    if (error) {
+      res.status(502).send(error);
+    } else {
+      res.status(200).send(results);
+    }
+  });
+
 });
 
 app.post('/reviews', (req, res) => {

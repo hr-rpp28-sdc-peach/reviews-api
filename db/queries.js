@@ -2,6 +2,7 @@ const config = require('../config.js');
 const { Pool } = require('pg');
 const pool = new Pool(config.DBconnect);
 
+/////GET REVIEWS FOR ONE PRODUCT
 module.exports.getReviews = (options, callback) => {
   var revData;
   var startIndex = (options.page - 1) * options.count;
@@ -23,7 +24,7 @@ module.exports.getReviews = (options, callback) => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM reviews WHERE product_id = ${options.product_id} ${orderBy}`, (error, results) => {
       if (error) {
-        reject(error);
+        callback(error);
       } else {
         resolve(results);
       }
@@ -36,7 +37,7 @@ module.exports.getReviews = (options, callback) => {
       photoArr.push(new Promise((resolve, reject) => {
         pool.query(`SELECT * FROM reviews_photos WHERE review_id = ${row.id}`, (err, photos) => {
           if (err) {
-            reject(err);
+            callback(err);
           } else {
             resolve(photos.rows);
           }
@@ -58,6 +59,84 @@ module.exports.getReviews = (options, callback) => {
   });
 }
 
+/////GET METADATA FOR THE REVIEWS FROM ONE PRODUCT
+module.exports.getMeta = (options, callback) => {
+console.log('got to line 64');
+  var response = {
+    'product_id': options.product_id,
+    'ratings': {},
+    'recommend': {
+      true: 0,
+      false: 0
+    },
+    'characteristics': {}
+  };
+
+  var charStorage = {};
+
+  var reviewIdStatements = [];
+
+  pool.query(`SELECT * FROM reviews WHERE product_id = ${options.product_id}`)
+  .then((results) => {
+  console.log('got to line 81');
+    results.rows.forEach((row) => {
+      reviewIdStatements.push(`review_id = ${row.id}`);
+      //set rating on the response
+      if (response.ratings[row.rating] === undefined) {
+        response.ratings[row.rating] = 1;
+      } else {
+        response.ratings[row.rating]++;
+      }
+      //set recommend on the response
+      if (row.recommended === 't') {
+        response.recommend[true]++;
+      } else {
+        response.recommend[false]++;
+      }
+    });
+    return results.rows;
+  }).then((reviewResults) => {
+  console.log('got to line 99');
+    return pool.query(`SELECT * FROM characteristics WHERE product_id = ${options.product_id}`);
+  }).then((charResults) => {
+  console.log('got to line 102');
+    charResults.rows.forEach((row) => {
+      charStorage[row.id] = {
+        'name': row.characterisitc_name,
+        'values': []
+      }
+    });
+    var reviewIdString = reviewIdStatements.join(' OR ');
+    var queryString = 'SELECT * FROM characteristics_reviews WHERE ' + reviewIdString;
+    console.log(queryString);
+    return pool.query(queryString);
+  }).then((charValResults) => {
+  console.log('got to line 113');
+    charValResults.rows.forEach((row) => {
+      charStorage[row.characteristic_id].values.push(row.characteristic_value);
+    });
+    for (var key in charStorage) {
+      var total = 0;
+      var count = 0;
+      charStorage[key].values.forEach((value) => {
+        total += value;
+        count++
+      });
+      var avg = (total / count).toFixed(4);
+      var charName = charStorage[key].name;
+      response.characteristics[charName] = {
+        'id': key,
+        'value': avg
+      }
+    }
+  console.log('got to line 131');
+    callback(null, response);
+  }).catch((error) => {
+    callback(error);
+  });
+}
+
+/////ADD A REVIEW
 module.exports.addReview = (options, callback) => {
   var queryString = `INSERT INTO reviews (product_id, rating, add_date, summary, body, recommended, reviewer_name, reviewer_email) VALUES (${options.product_id}, ${options.rating}, current_timestamp, $$${options.summary}$$, $$${options.body}$$, ${options.recommend}, $$${options.name}$$, $$${options.email}$$)RETURNING id`;
   var reviewId = null;
@@ -115,6 +194,7 @@ module.exports.addReview = (options, callback) => {
   });
 }
 
+/////REPORT A REVIEW
 module.exports.report = (options, callback) => {
   pool.query(`UPDATE reviews SET reported = true WHERE id = ${options.review_id}`, (error, results) => {
     if (error) {
@@ -125,17 +205,17 @@ module.exports.report = (options, callback) => {
   });
 }
 
+/////MARK A REVIEW AS HELPFUL
 module.exports.helpful = (options, callback) => {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT helpfulness FROM reviews WHERE id = ${options.review_id}`, (error, results) => {
       if (error) {
-        reject(error);
+        callback(error);
       } else {
         resolve(results.rows);
       }
     });
   }).then((helpfulness) => {
-    console.log(helpfulness);
     pool.query(`UPDATE reviews SET helpfulness = ${helpfulness[0].helpfulness + 1} WHERE id = ${options.review_id}`, (error, results) => {
       if (error) {
         callback(error);

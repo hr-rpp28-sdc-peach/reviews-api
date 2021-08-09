@@ -296,3 +296,4 @@ SELECT setval('reviews_id_seq', (SELECT MAX(id) FROM reviews)+1);
 SELECT setval('reviews_photos_id_seq', (SELECT MAX(id) FROM reviews_photos)+1);
 
 SELECT setval('characteristics_reviews_id_seq', (SELECT MAX(id) FROM characteristics_reviews)+1);
+
