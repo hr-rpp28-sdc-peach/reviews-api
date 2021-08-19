@@ -102,7 +102,7 @@ module.exports.getMeta = (options, callback) => {
         'values': []
       }
     });
-    if (reviewIDStatements.length === 0) {
+    if (reviewIdStatements.length === 0) {
       return [];
     } else {
       var reviewIdString = reviewIdStatements.join(' OR ');
