@@ -61,7 +61,6 @@ module.exports.getReviews = (options, callback) => {
 
 /////GET METADATA FOR THE REVIEWS FROM ONE PRODUCT
 module.exports.getMeta = (options, callback) => {
-console.log('got to line 64');
   var response = {
     'product_id': options.product_id,
     'ratings': {},
@@ -78,7 +77,6 @@ console.log('got to line 64');
 
   pool.query(`SELECT * FROM reviews WHERE product_id = ${options.product_id}`)
   .then((results) => {
-  console.log('got to line 81');
     results.rows.forEach((row) => {
       reviewIdStatements.push(`review_id = ${row.id}`);
       //set rating on the response
@@ -96,25 +94,27 @@ console.log('got to line 64');
     });
     return results.rows;
   }).then((reviewResults) => {
-  console.log('got to line 99');
     return pool.query(`SELECT * FROM characteristics WHERE product_id = ${options.product_id}`);
   }).then((charResults) => {
-  console.log('got to line 102');
     charResults.rows.forEach((row) => {
       charStorage[row.id] = {
         'name': row.characterisitc_name,
         'values': []
       }
     });
-    var reviewIdString = reviewIdStatements.join(' OR ');
-    var queryString = 'SELECT * FROM characteristics_reviews WHERE ' + reviewIdString;
-    console.log(queryString);
-    return pool.query(queryString);
+    if (reviewIDStatements.length === 0) {
+      return [];
+    } else {
+      var reviewIdString = reviewIdStatements.join(' OR ');
+      var queryString = 'SELECT * FROM characteristics_reviews WHERE ' + reviewIdString;
+      return pool.query(queryString);
+    }
   }).then((charValResults) => {
-  console.log('got to line 113');
-    charValResults.rows.forEach((row) => {
-      charStorage[row.characteristic_id].values.push(row.characteristic_value);
-    });
+    if (charValResults.length > 0) {
+      charValResults.rows.forEach((row) => {
+        charStorage[row.characteristic_id].values.push(row.characteristic_value);
+      });
+    }
     for (var key in charStorage) {
       var total = 0;
       var count = 0;
@@ -122,14 +122,18 @@ console.log('got to line 64');
         total += value;
         count++
       });
-      var avg = (total / count).toFixed(4);
+      var avg;
+      if (count === 0) {
+        avg = null;
+      } else {
+        avg = (total / count).toFixed(4);
+      }
       var charName = charStorage[key].name;
       response.characteristics[charName] = {
         'id': key,
         'value': avg
       }
     }
-  console.log('got to line 131');
     callback(null, response);
   }).catch((error) => {
     callback(error);
@@ -171,10 +175,8 @@ module.exports.addReview = (options, callback) => {
     var characteristicArr = [];
 
     for (var key in characteristics) {
-      console.log(key);
       characteristicArr.push(new Promise((resolve, reject) => {
         var charQueryString = `INSERT INTO characteristics_reviews (characteristic_id, review_id, characteristic_value) VALUES (${key}, ${reviewId}, ${characteristics[key]})`;
-        console.log(charQueryString);
         pool.query(charQueryString, (error, results) => {
           if (error) {
             console.log(error);
@@ -184,7 +186,6 @@ module.exports.addReview = (options, callback) => {
         });
       })
     );
-    console.log(characteristicArr);
   }
   return Promise.all(characteristicArr);
   }).then((results) => {
