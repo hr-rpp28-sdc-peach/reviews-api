@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage --detectOpenHandles",
     "start": "npx ./server/index.js",
-    "dev": "nodemon ./server/index.js"
+    "dev": "nodemon ./server/index.js",
+    "redis-server": "/margaretkearns/local/Homebrew/etc/redis.conf"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "express-redis-cache": "^1.1.3",
     "ioredis": "^4.27.8",
     "postgres": "^1.0.2",
     "redis": "^3.1.2",

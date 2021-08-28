@@ -1,13 +1,16 @@
 const express = require('express');
+
 const bodyParser = require('body-parser');
 const db = require('../db/queries.js');
 let app = express();
-
+const ExpressRedisCache = require('express-redis-cache');
+const reviewCache = ExpressRedisCache({});
+const metaCache = ExpressRedisCache({});
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/reviews', (req, res) => {
+app.get('/reviews', reviewCache.route(), (req, res) => {
   var options = req.query;
   if (options.page === undefined) {
     options.page = 1;
@@ -55,7 +58,7 @@ app.get('/reviews', (req, res) => {
   })
 });
 
-app.get('/reviews/meta', (req, res) => {
+app.get('/reviews/meta', metaCache.route(), (req, res) => {
   db.getMeta(req.query, (error, results) => {
     if (error) {
       res.status(502).send(error);
